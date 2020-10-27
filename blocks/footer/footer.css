@@ -7,3 +7,9 @@
         width: 90%;
     }
 }
+
+@media(max-width: 620px){
+    .footer{
+        width: 100%;
+    }
+}

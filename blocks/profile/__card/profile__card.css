@@ -3,3 +3,10 @@
     align-items: flex-end;
     align-self: center;
 }
+
+@media(max-width: 620px){
+    .profile__card{
+        align-items: center;
+        margin-bottom: -2px;
+    }    
+}

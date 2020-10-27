@@ -11,3 +11,10 @@
         width: 90%;
     }
 }
+
+@media(max-width: 620px){
+    .header{
+        padding-top: 28px;
+        width: 100%;
+    }
+}

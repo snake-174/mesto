@@ -8,9 +8,8 @@
 
 @media(max-width: 620px){
     .profile__user-name{
-        margin: 14px 0 8px;
         font-size: 27px;
         line-height: 2.07;
-        text-align: center;
+        text-align: end;
     }
 }
