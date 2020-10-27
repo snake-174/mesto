@@ -1,0 +1,13 @@
+.header{
+    width: 882px;
+    box-sizing: border-box;
+    padding-top: 45px;
+    margin-bottom: 40px;
+
+}
+
+@media(max-width: 930px){
+    .header{
+        width: 90%;
+    }
+}

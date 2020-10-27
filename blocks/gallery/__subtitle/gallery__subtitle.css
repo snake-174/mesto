@@ -1,0 +1,8 @@
+.gallery__subtitle{
+    width: 246px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 25px auto 26px;
+
+}
