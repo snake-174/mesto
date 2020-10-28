@@ -1,0 +1,9 @@
+.popup__close-button-img{
+    width: 40px;
+}
+
+@media(max-width:530px){
+    .popup__close-button-img{
+        width: 26px;
+    }
+}

@@ -1,0 +1,21 @@
+.popup__close-button{
+    background-color: transparent;
+    border: 0;
+    outline: none;
+    position: absolute;
+    top: -42px;
+    left: 420px;
+    transform: rotate(45deg);
+    transition: opacity 0.3s ease-in;
+}
+
+.popup__close-button:hover{
+    opacity: 60%;
+}
+
+@media(max-width:530px){
+    .popup__close-button{
+        left: 245px;
+        top: -48px;
+    }
+}
