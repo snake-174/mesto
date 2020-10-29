@@ -4,13 +4,13 @@
     width: 85%;
     height: 27.34px;
     box-sizing: border-box;
-    border-bottom: 1px solid #bcbcc4;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     background-color: transparent;
     font-size: 14px;
     line-height: 1.2;
     font-family: 'Inter' , Arial, sans-serif;
     padding-bottom: 10px;
-    margin-bottom: 30px;
+    margin: 0 auto 30px;
 }
 
 .popup__input::placeholder {

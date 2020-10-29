@@ -15,43 +15,45 @@
             <div class="popup">
                 
                 <div class="popup__container">
-                   <button class="popup__close-button"><img src="./images/add-button.svg"  class="popup__close-button-img" alt="крест"></button>
+                   <button class="popup__close-button" type="button"><img src="./images/add-button.svg"  class="popup__close-button-img" alt="крест"></button>
                     <h2 class="popup__title">Редактировать профиль</h2>
-                    <input type="text" class="popup__input popup__input_type_name">
-                    <input type="text" class="popup__input popup__input_type_profession">
-                    <button class="popup__save-button">Сохранить</button>
+                    <form class="popup__form" type="submit">
+                        <input type="text" class="popup__input popup__input_type_name" name="name">
+                        <input type="text" class="popup__input popup__input_type_profession" name="profession">
+                        <button class="popup__save-button" type="submit">Сохранить</button>
+                    </form>
                 </div>
             </div>
 
         <main>
-            <div class="profile">
+            <section class="profile">
                 <div class="profile__user">
                     <img src="./images/jak-iv.png" class="profile__img" alt="аватарка">
                     <div class="profile__card">
                         <h1 class="profile__user-name">Жак-Ив Кусто</h1>
-                        <button class="profile__edit-button"> <img src="./images/edit-button.svg" class="profile__edit-button-img" alt="кнопка изменить"> </button>
+                        <button class="profile__edit-button" type="button"> <img src="./images/edit-button.svg" class="profile__edit-button-img" alt="кнопка изменить"> </button>
                     </div>
                     <p class="profile__user-profession">Исследователь океана</p>
                 </div>
-                <button class="profile__add-button">
+                <button class="profile__add-button" type="button">
                     <img src="./images/add-button.svg" class="profile__add-button-image" alt="кнопка добавить">
                 </button>
-            </div>
+            </section>
 
-            <div class="gallery">
+            <section class="gallery">
                 <div class="gallery__card">
                     <img src="./images/dombai.jpg" class="gallery__image" alt="склон горы">
                     <div class="gallery__subtitle">
                         <h2 class="gallery__subtitle-text">Домбай</h2>
-                        <img src="./images/Vector-1.svg" class="gallery__like-button" alt="сердце">
+                        <button class="gallery__like-button" type="button"></button>
                     </div>
                 </div>
 
                 <div class="gallery__card">
-                    <img src="./images/everest.jpg" class="gallery__image" alt='поле и гора'>
+                    <img src="./images/everest.jpg" class="gallery__image" alt="поле и гора">
                     <div class="gallery__subtitle">
                         <h2 class="gallery__subtitle-text">Гора Эльбрус</h2>
-                        <img src="./images/Vector-1.svg" class="gallery__like-button" alt="сердце">
+                        <button class="gallery__like-button" type="button"></button>
                     </div>
                 </div>
 
@@ -59,7 +61,7 @@
                     <img src="./images/karachevsk.jpg" class="gallery__image" alt="храм">
                     <div class="gallery__subtitle">
                         <h2 class="gallery__subtitle-text">Карачаевск</h2>
-                        <img src="./images/Vector-1.svg" class="gallery__like-button" alt="сердце">
+                        <button class="gallery__like-button" type="button"></button>
                     </div>
                 </div>
 
@@ -67,7 +69,7 @@
                     <img src="./images/karachevsk.jpg" class="gallery__image" alt="храм">
                     <div class="gallery__subtitle">
                         <h2 class="gallery__subtitle-text">Карачаево-Черкессия</h2>
-                        <img src="./images/Vector-1.svg" class="gallery__like-button" alt="сердце">
+                        <button class="gallery__like-button" type="button"></button>
                     </div>
                 </div>
 
@@ -75,18 +77,18 @@
                     <img src="./images/dombai.jpg" class="gallery__image" alt="склон горы">
                     <div class="gallery__subtitle">
                         <h2 class="gallery__subtitle-text">Домбай</h2>
-                        <img src="./images/Vector-1.svg" class="gallery__like-button" alt="сердце">
+                        <button class="gallery__like-button" type="button"></button>
                     </div>
                 </div>
 
                 <div class="gallery__card">
-                    <img src="./images/everest.jpg" class="gallery__image" alt='поле и гора'>
+                    <img src="./images/everest.jpg" class="gallery__image" alt="поле и гора">
                     <div class="gallery__subtitle">
                         <h2 class="gallery__subtitle-text">Гора Эльбрус</h2>
-                        <img src="./images/Vector-1.svg" class="gallery__like-button" alt="сердце">
+                        <button class="gallery__like-button" type="button"></button>
                     </div>
                 </div>
-            </div>
+            </section>
         </main>
 
         <footer class="footer">

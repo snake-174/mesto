@@ -4,6 +4,7 @@
     background-color: transparent;
     border: 0;
     outline: none;
+    cursor: pointer;
     transition: opacity 0.3s ease-in;
 }
 
@@ -15,6 +16,5 @@
     .profile__edit-button{
         margin: 0;
         margin-left: 3px;
-        margin-bottom: -5px;
     }
 }

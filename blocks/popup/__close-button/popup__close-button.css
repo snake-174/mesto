@@ -6,6 +6,7 @@
     top: -42px;
     left: 420px;
     transform: rotate(45deg);
+    cursor: pointer;
     transition: opacity 0.3s ease-in;
 }
 
