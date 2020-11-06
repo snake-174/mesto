@@ -4,13 +4,17 @@ const popupEdit= document.querySelector('.popup_edit');
 const popupAdd = document.querySelector('.popup_add');
 const closeButtonAdd = popupAdd.querySelector('.popup__close-button_add');
 const closeButtonEdit = popupEdit.querySelector('.popup__close-button_edit');
-const form = popup.querySelector('.popup__form');
-const inputName = popup.querySelector('.popup__input_type_name');
-const inputProfession= popup.querySelector('.popup__input_type_profession');
+const formEdit = popupEdit.querySelector('.popup__form_edit');
+const formAdd = popupAdd.querySelector('.popup__form_add');
+const inputName = popupEdit.querySelector('.popup__input_type_name');
+const inputProfession= popupEdit.querySelector('.popup__input_type_profession');
+const inputMesto= popupAdd.querySelector('.popup__input_type_mesto');
+const inputImage= popupAdd.querySelector('.popup__input_type_image');
 const name = document.querySelector('.profile__user-name');
 const profession = document.querySelector('.profile__user-profession');
 const addButton = document.querySelector('.profile__add-button');
-const gallery = document.querySelector('.gallery');
+//const gallery = document.querySelector('.gallery');
+
 
 const initialCards = [
     {
@@ -39,12 +43,12 @@ const initialCards = [
     }
 ]; 
 
+
 initialCards.forEach(function cardLoad(arr){
-    const card = document.querySelector('#card').content;
-    const cardElement = card.cloneNode(true);
+    const cardElement = document.querySelector('#card').content.cloneNode(true);
     cardElement.querySelector('.gallery__image').src = arr.link;
     cardElement.querySelector('.gallery__subtitle-text').textContent = arr.name;
-    gallery.append(cardElement);
+    document.querySelector('.gallery').append(cardElement);
 })
 
 function openPopup(item){ 
@@ -73,12 +77,25 @@ closeButtonAdd.addEventListener('click', closePopupAdd = () => {
     closePopup(popupAdd);
 });
 
-form.addEventListener('submit', function formSubmitHandler (evt) {
+formEdit.addEventListener('submit', formSubmitHandler = evt => {
     evt.preventDefault(); 
     name.textContent = inputName.value;
     profession.textContent = inputProfession.value;
     closePopup(popupEdit);
 });
 
+formAdd.addEventListener('submit', formSubmitHandler = evt => {
+    const cardElement = document.querySelector('#card').content.cloneNode(true);
+    evt.preventDefault(); 
+    cardElement.querySelector('.gallery__image').src = inputImage.value;
+    cardElement.querySelector('.gallery__subtitle-text').textContent = inputMesto.value;
+    document.querySelector('.gallery').prepend(cardElement);
+    closePopup(popupAdd)
+    formAdd.reset();
+})
+
+document.querySelector('.gallery__like-button').addEventListener('click', like = () => {
+    gallery.querySelector('.gallery__like-button').classList.toggle('gallery__like-button_active');
+});
 
 
