@@ -2,6 +2,7 @@
 @import url(../fonts/Inter/inter.css);
 @import url(../blocks/body/body.css);
 @import url(../blocks/root/root.css);
+@import url(../blocks/main/main.css);
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
 @import url(../blocks/popup/popup.css);
@@ -28,6 +29,7 @@
 @import url(../blocks/gallery/__image/gallery__image.css);
 @import url(../blocks/gallery/__like-button/gallery__like-button.css);
 @import url(../blocks/gallery/__like-button/_active/gallery__like-button_active.css);
+@import url(../blocks/gallery/__delete-button/gallery__delete-button.css);
 @import url(../blocks/gallery/__subtitle-text/gallery__subtitle-text.css);
 @import url(../blocks/gallery/__subtitle/gallery__subtitle.css);
 @import url(../blocks/footer/footer.css);
