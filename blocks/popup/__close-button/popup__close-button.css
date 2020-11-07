@@ -4,7 +4,7 @@
     outline: none;
     position: absolute;
     top: -42px;
-    left: 420px;
+    right: 0;
     transform: rotate(45deg);
     cursor: pointer;
     transition: opacity 0.3s ease-in;

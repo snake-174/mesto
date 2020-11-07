@@ -56,17 +56,18 @@ cardCreate = (imageValue, nameValue) => {
     const cardElement = card.cloneNode(true);
     cardElement.querySelector('.gallery__image').src = imageValue;
     cardElement.querySelector('.gallery__subtitle-text').textContent = nameValue;
-    cardElement.querySelector('.gallery__like-button').addEventListener('click', function (evt){
+    cardElement.querySelector('.gallery__like-button').addEventListener('click', evt => {
         evt.target.classList.toggle('gallery__like-button_active');
       });
-    cardElement.querySelector('.gallery__delete-button').addEventListener('click', function(evt){
+    cardElement.querySelector('.gallery__delete-button').addEventListener('click', evt => {
         const cardDel = evt.target.closest('.gallery__card');
         cardDel.remove();
-    })
-    /*cardElement.querySelector('.gallery__image').addEventListner('click', function(evt){
-        openPopup(evt.target);
+    });
+   /* cardElement.querySelector('.gallery__image').addEventListener('click', evt => { //нормально не работает до 70 строки разобраться
+        openPopup(popupImg);
         popupImg.querySelector('.popup__image').src = evt.target.src;
-    })*/
+        popupImg.querySelector('.popup__image-subtitle').textContent = evt.target.closest('.gallery__subtitle-text').textContent; 
+    });*/
     document.querySelector('.gallery').prepend(cardElement);
     return
 }
