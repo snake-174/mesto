@@ -43,11 +43,11 @@ const initialCards = [
     }
 ]; 
 
-openPopup = popupType => { 
+const openPopup = popupType => { 
     popupType.classList.add('popup_open');   
 }
 
-closePopup = popupType => { 
+const closePopup = popupType => { 
     popupType.classList.remove('popup_open');
 }
 
@@ -70,14 +70,33 @@ cardCreate = (imageValue, nameValue) => {
         popupImg.querySelector('.popup__image').src = evt.target.src;
         popupImg.querySelector('.popup__image-subtitle').textContent = evt.target.nextSibling.nextSibling.querySelector('.gallery__subtitle-text').textContent;
     });
-
-    document.querySelector('.gallery').prepend(cardElement);
-    return
+    return cardElement;
 }
 
-initialCards.forEach(function cardLoad(arr){
-    cardCreate(arr.link, arr.name);
-});
+cardLoad = (imageValue, nameValue) => {
+    const card = document.querySelector('#card').content;
+    const cardElement = card.cloneNode(true);
+    cardElement.querySelector('.gallery__image').src = imageValue;
+    cardElement.querySelector('.gallery__subtitle-text').textContent = nameValue;
+    cardElement.querySelector('.gallery__like-button').addEventListener('click', evt => {
+        evt.target.classList.toggle('gallery__like-button_active');
+      });
+
+    cardElement.querySelector('.gallery__delete-button').addEventListener('click', evt => {
+        const cardDel = evt.target.closest('.gallery__card');
+        cardDel.remove();
+    });
+    cardElement.querySelector('.gallery__image').addEventListener('click', evt => {
+        openPopup(popupImg);
+        popupImg.querySelector('.popup__image').src = evt.target.src;
+        popupImg.querySelector('.popup__image-subtitle').textContent = evt.target.nextSibling.nextSibling.querySelector('.gallery__subtitle-text').textContent;
+    });
+    return cardElement; 
+}
+
+initialCards.forEach((arr) => {
+    document.querySelector('.gallery').append(cardLoad(arr.link, arr.name));
+    });
 
 
 
@@ -112,7 +131,7 @@ formEdit.addEventListener('submit', evt => {
  
 formAdd.addEventListener('submit', evt =>{
     evt.preventDefault();
-    cardCreate(inputImage.value, inputMesto.value);
+    document.querySelector('.gallery').prepend(cardCreate(inputImage.value, inputMesto.value));
     closePopup(popupAdd);
     formAdd.reset();
 });
