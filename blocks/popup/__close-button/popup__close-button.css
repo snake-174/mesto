@@ -4,7 +4,7 @@
     outline: none;
     position: absolute;
     top: -42px;
-    right: 0;
+    right: -42px;
     transform: rotate(45deg);
     cursor: pointer;
     transition: opacity 0.3s ease-in;
@@ -16,7 +16,7 @@
 
 @media(max-width:530px){
     .popup__close-button{
-        left: 245px;
+        right: 0px;
         top: -48px;
     }
 }
