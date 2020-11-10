@@ -4,9 +4,9 @@
     font-weight: normal;
     font-size: 18px;
     line-height: 1.2;
-    text-overflow: ellipsis; 
-    max-width: 500px; 
-    overflow: hidden; 
+    text-overflow: ellipsis;
+    max-width: 500px;
+    overflow: hidden;
     white-space: nowrap;
 }
 
