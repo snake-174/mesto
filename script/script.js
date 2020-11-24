@@ -1,4 +1,6 @@
+const gallery = document.querySelector('.gallery');
 const editButton= document.querySelector('.profile__edit-button');
+const addButton = document.querySelector('.profile__add-button');
 const popup = document.querySelector('.popup');
 const popupEdit= document.querySelector('.popup_edit');
 const popupAdd = document.querySelector('.popup_add');
@@ -14,8 +16,6 @@ const inputMesto= popupAdd.querySelector('.popup__input_type_mesto');
 const inputImage= popupAdd.querySelector('.popup__input_type_image');
 const name = document.querySelector('.profile__user-name');
 const profession = document.querySelector('.profile__user-profession');
-const addButton = document.querySelector('.profile__add-button');
-const gallery = document.querySelector('.gallery');
 
 const initialCards = [
     {
@@ -76,12 +76,11 @@ cardCreate = (imageValue, nameValue) => {
 
 initialCards.forEach((arr) => {
     gallery.append(cardCreate(arr.link, arr.name));
-    });
-
-
+});
 
 addButton.addEventListener('click', () => {
     openPopup(popupAdd);
+
 })
 
 editButton.addEventListener('click', () => {
@@ -102,6 +101,26 @@ closeButtonImg.addEventListener('click', () => {
     closePopup(popupImg);
 });
 
+popupAdd.addEventListener('mousedown', (evt) => {
+    closePopup(evt.target);
+});
+
+popupEdit.addEventListener('mousedown', (evt) => {
+    closePopup(evt.target);
+});
+
+popupImg.addEventListener('mousedown', (evt) => {
+    closePopup(evt.target);
+});
+
+document.addEventListener('keydown', (evt) => {
+    if(evt.key === 'Escape'){
+        closePopup(popupAdd);
+        closePopup(popupImg);
+        closePopup(popupEdit);
+    }
+});
+
 formEdit.addEventListener('submit', evt => {
     evt.preventDefault(); 
     name.textContent = inputName.value;
@@ -109,7 +128,7 @@ formEdit.addEventListener('submit', evt => {
     closePopup(popupEdit);
 });
  
-formAdd.addEventListener('submit', evt =>{
+formAdd.addEventListener('submit', evt => {
     evt.preventDefault();
     gallery.prepend(cardCreate(inputImage.value, inputMesto.value));
     closePopup(popupAdd);
