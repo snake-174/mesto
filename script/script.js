@@ -55,7 +55,8 @@ const closePopup = popupType => {
 cardCreate = (imageValue, nameValue) => {
     const card = document.querySelector('#card').content;
     const cardElement = card.cloneNode(true);
-    cardElement.querySelector('.gallery__image').src = imageValue;
+    const galeryImg = cardElement.querySelector('.gallery__image');
+    galeryImg.src = imageValue;
     cardElement.querySelector('.gallery__subtitle-text').textContent = nameValue;
     cardElement.querySelector('.gallery__like-button').addEventListener('click', evt => {
         evt.target.classList.toggle('gallery__like-button_active');
@@ -66,12 +67,55 @@ cardCreate = (imageValue, nameValue) => {
         cardDel.remove();
     });
 
-    cardElement.querySelector('.gallery__image').addEventListener('click', evt => {
+    galeryImg.addEventListener('click', evt => {
         openPopup(popupImg);
         popupImg.querySelector('.popup__image').src = evt.target.src;
         popupImg.querySelector('.popup__image-subtitle').textContent = evt.target.nextSibling.nextSibling.querySelector('.gallery__subtitle-text').textContent;
+        close(popupImg);
     });
     return cardElement;
+}
+
+const buttonDisable = button =>{
+    const formButton = button.querySelector('.popup__save-button')
+    formButton.classList.add('popup__save-button_error');
+    formButton.disabled = true;
+}
+
+// 85-100 робит не правильно чини
+const closeEscape = popupType => {
+    const buttonEvent = (evt) => { //87-91 как это вынести в отдельную функцию?
+        if(evt.key === 'Escape') {
+            closePopup(popupType);
+            console.log(evt.key);// тест
+        }
+    }
+   document.removeEventListener('keydown', buttonEvent);
+
+    if(!popupType.classList.contains('.popup_open')){
+        document.addEventListener('keydown', buttonEvent);
+    }
+
+    
+}
+
+const closeButton = popupType => {
+    const popupButton = popupType.querySelector('.popup__close-button');
+    popupButton.addEventListener('click', () => {
+        closePopup(popupType)
+    });
+}
+
+const closeOverlay = popupType =>{
+    popupType.addEventListener('mousedown', (evt) => {
+        closePopup(evt.target);
+    });    
+}
+
+const close = popupType =>{
+    closeEscape(popupType);
+    closeButton(popupType);
+    closeOverlay(popupType);
 }
 
 initialCards.forEach((arr) => {
@@ -80,45 +124,15 @@ initialCards.forEach((arr) => {
 
 addButton.addEventListener('click', () => {
     openPopup(popupAdd);
-
+    
 })
+close(popupAdd);
 
 editButton.addEventListener('click', () => {
     openPopup(popupEdit);
     inputName.value = name.textContent;
     inputProfession.value = profession.textContent;
-});
-
-closeButtonEdit.addEventListener('click', () => {
-    closePopup(popupEdit);
-});
-
-closeButtonAdd.addEventListener('click', () => {
-    closePopup(popupAdd);
-});
-
-closeButtonImg.addEventListener('click', () => {
-    closePopup(popupImg);
-});
-
-popupAdd.addEventListener('mousedown', (evt) => {
-    closePopup(evt.target);
-});
-
-popupEdit.addEventListener('mousedown', (evt) => {
-    closePopup(evt.target);
-});
-
-popupImg.addEventListener('mousedown', (evt) => {
-    closePopup(evt.target);
-});
-
-document.addEventListener('keydown', (evt) => {
-    if(evt.key === 'Escape'){
-        closePopup(popupAdd);
-        closePopup(popupImg);
-        closePopup(popupEdit);
-    }
+    close(popupEdit);
 });
 
 formEdit.addEventListener('submit', evt => {
@@ -126,12 +140,13 @@ formEdit.addEventListener('submit', evt => {
     name.textContent = inputName.value;
     profession.textContent = inputProfession.value;
     closePopup(popupEdit);
+    buttonDisable(evt.target);
 });
  
 formAdd.addEventListener('submit', evt => {
-    evt.preventDefault();
+    evt.preventDefault(); 
     gallery.prepend(cardCreate(inputImage.value, inputMesto.value));
     closePopup(popupAdd);
+    buttonDisable(evt.target)
     formAdd.reset();
 });
-
