@@ -42,13 +42,13 @@ const initialCards = [
         name: 'Байкал',
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
-]; 
+];
 
-const openPopup = popupType => { 
+const openPopup = popupType => {
     popupType.classList.add('popup_open');   
 }
 
-const closePopup = popupType => { 
+const closePopup = popupType => {
     popupType.classList.remove('popup_open');
 }
 
@@ -82,38 +82,60 @@ const buttonDisable = button =>{
     formButton.disabled = true;
 }
 
-// 85-100 робит не правильно чини
-const closeEscape = popupType => {
-    const buttonEvent = (evt) => { //87-91 как это вынести в отдельную функцию?
+/*const pressEsc = (evt, popupType) =>{  
+    if(popupType.classList.contains('.popup_open')){ 
         if(evt.key === 'Escape') {
             closePopup(popupType);
-            console.log(evt.key);// тест
+            console.log(evt.key);
         }
     }
-   document.removeEventListener('keydown', buttonEvent);
+}*/
 
-    if(!popupType.classList.contains('.popup_open')){
-        document.addEventListener('keydown', buttonEvent);
+const closeEscape = popupType => {
+
+}
+const closePopupEsc = popupType =>{
+    const escPressed = (evt, popupType) =>{
+        if(evt.key === 'Escape'){
+            closePopup(popupType);
+            console.log(evt.key);
+        }
     }
 
-    
-}
+    addEventListnerEsc = popupType =>{
+        if(popupType.classList.contains('popup_open')){
+            document.addEventListener('keydown', escPressed);
+            console.log('a')
+        } 
+    }
 
+    removeEventListnerEsc = popupType =>{
+        if(!popupType.classList.contains('popup_open')){
+            document.removeEventListener('keydown', escPressed);
+            console.log('b')
+        }
+    }
+    addEventListnerEsc(popupType);
+    removeEventListnerEsc(popupType);
+}
+-
 const closeButton = popupType => {
     const popupButton = popupType.querySelector('.popup__close-button');
     popupButton.addEventListener('click', () => {
         closePopup(popupType)
+        
     });
+     
 }
 
 const closeOverlay = popupType =>{
     popupType.addEventListener('mousedown', (evt) => {
         closePopup(evt.target);
-    });    
+    });
 }
 
 const close = popupType =>{
-    closeEscape(popupType);
+    //closeEscape(popupType);
     closeButton(popupType);
     closeOverlay(popupType);
 }
@@ -124,9 +146,11 @@ initialCards.forEach((arr) => {
 
 addButton.addEventListener('click', () => {
     openPopup(popupAdd);
-    
-})
-close(popupAdd);
+    close(popupAdd);
+    closePopupEsc(popupAdd);
+});
+closePopupEsc(popupAdd);
+
 
 editButton.addEventListener('click', () => {
     openPopup(popupEdit);
@@ -136,17 +160,18 @@ editButton.addEventListener('click', () => {
 });
 
 formEdit.addEventListener('submit', evt => {
-    evt.preventDefault(); 
+    evt.preventDefault();
     name.textContent = inputName.value;
     profession.textContent = inputProfession.value;
     closePopup(popupEdit);
     buttonDisable(evt.target);
 });
- 
+
 formAdd.addEventListener('submit', evt => {
-    evt.preventDefault(); 
+    evt.preventDefault();
     gallery.prepend(cardCreate(inputImage.value, inputMesto.value));
     closePopup(popupAdd);
     buttonDisable(evt.target)
     formAdd.reset();
 });
+
