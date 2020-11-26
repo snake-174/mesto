@@ -44,12 +44,52 @@ const initialCards = [
     }
 ];
 
+const addEventListnerEsc = popupType =>{
+    const escPressed = evt =>{
+        if(evt.key === 'Escape'){
+            closePopup(popupType);
+        }
+    }
+
+    if(popupType.classList.contains('popup_open')){
+        document.addEventListener('keydown', escPressed);
+    } 
+ }
+
+const removeEventListnerEsc = popupType =>{
+    const escPressed = evt =>{
+        if(evt.key === 'Escape'){
+            closePopup(popupType);
+        }
+    }
+    document.removeEventListener('keydown', escPressed);
+}
+
+const closeButton = popupType => {
+    const popupButton = popupType.querySelector('.popup__close-button');
+    popupButton.addEventListener('click', () => {
+        closePopup(popupType)
+    }); 
+}
+
+const closeOverlay = popupType =>{
+    popupType.addEventListener('mousedown', (evt) => {
+        closePopup(evt.target);
+    });
+}
+
+const close = popupType =>{
+    closeButton(popupType);
+    closeOverlay(popupType);
+}
+
 const openPopup = popupType => {
     popupType.classList.add('popup_open');   
 }
 
 const closePopup = popupType => {
     popupType.classList.remove('popup_open');
+    removeEventListnerEsc(popupType);
 }
 
 cardCreate = (imageValue, nameValue) => {
@@ -71,6 +111,7 @@ cardCreate = (imageValue, nameValue) => {
         openPopup(popupImg);
         popupImg.querySelector('.popup__image').src = evt.target.src;
         popupImg.querySelector('.popup__image-subtitle').textContent = evt.target.nextSibling.nextSibling.querySelector('.gallery__subtitle-text').textContent;
+        addEventListnerEsc(popupImg);
         close(popupImg);
     });
     return cardElement;
@@ -82,64 +123,6 @@ const buttonDisable = button =>{
     formButton.disabled = true;
 }
 
-/*const pressEsc = (evt, popupType) =>{  
-    if(popupType.classList.contains('.popup_open')){ 
-        if(evt.key === 'Escape') {
-            closePopup(popupType);
-            console.log(evt.key);
-        }
-    }
-}*/
-
-const closeEscape = popupType => {
-
-}
-const closePopupEsc = popupType =>{
-    const escPressed = (evt, popupType) =>{
-        if(evt.key === 'Escape'){
-            closePopup(popupType);
-            console.log(evt.key);
-        }
-    }
-
-    addEventListnerEsc = popupType =>{
-        if(popupType.classList.contains('popup_open')){
-            document.addEventListener('keydown', escPressed);
-            console.log('a')
-        } 
-    }
-
-    removeEventListnerEsc = popupType =>{
-        if(!popupType.classList.contains('popup_open')){
-            document.removeEventListener('keydown', escPressed);
-            console.log('b')
-        }
-    }
-    addEventListnerEsc(popupType);
-    removeEventListnerEsc(popupType);
-}
--
-const closeButton = popupType => {
-    const popupButton = popupType.querySelector('.popup__close-button');
-    popupButton.addEventListener('click', () => {
-        closePopup(popupType)
-        
-    });
-     
-}
-
-const closeOverlay = popupType =>{
-    popupType.addEventListener('mousedown', (evt) => {
-        closePopup(evt.target);
-    });
-}
-
-const close = popupType =>{
-    //closeEscape(popupType);
-    closeButton(popupType);
-    closeOverlay(popupType);
-}
-
 initialCards.forEach((arr) => {
     gallery.append(cardCreate(arr.link, arr.name));
 });
@@ -147,16 +130,15 @@ initialCards.forEach((arr) => {
 addButton.addEventListener('click', () => {
     openPopup(popupAdd);
     close(popupAdd);
-    closePopupEsc(popupAdd);
+    addEventListnerEsc(popupAdd);
 });
-closePopupEsc(popupAdd);
-
 
 editButton.addEventListener('click', () => {
     openPopup(popupEdit);
     inputName.value = name.textContent;
     inputProfession.value = profession.textContent;
     close(popupEdit);
+    addEventListnerEsc(popupEdit);
 });
 
 formEdit.addEventListener('submit', evt => {
