@@ -40,7 +40,7 @@ const initialCards = [
     }
 ];
 
-const addEventListnerEsc = popupType =>{
+const closeEsc = popupType =>{
     const escPressed = evt =>{
         if(evt.key === 'Escape'){
             closePopup(popupType);
@@ -49,17 +49,10 @@ const addEventListnerEsc = popupType =>{
 
     if(popupType.classList.contains('popup_open')){
         document.addEventListener('keydown', escPressed);
-    } 
- }
-
-const removeEventListnerEsc = popupType =>{
-    const escPressed = evt =>{
-        if(evt.key === 'Escape'){
-            closePopup(popupType);
-        }
+    } else {
+        (document.removeEventListener('keydown', escPressed));
     }
-    document.removeEventListener('keydown', escPressed);
-}
+ }
 
 const closeButton = popupType => {
     const popupButton = popupType.querySelector('.popup__close-button');
@@ -74,18 +67,12 @@ const closeOverlay = popupType =>{
     });
 }
 
-const close = popupType =>{
-    closeButton(popupType);
-    closeOverlay(popupType);
-}
-
 const openPopup = popupType => {
     popupType.classList.add('popup_open');   
 }
 
 const closePopup = popupType => {
     popupType.classList.remove('popup_open');
-    removeEventListnerEsc(popupType);
 }
 
 cardCreate = (imageValue, nameValue) => {
@@ -107,16 +94,11 @@ cardCreate = (imageValue, nameValue) => {
         openPopup(popupImg);
         popupImg.querySelector('.popup__image').src = evt.target.src;
         popupImg.querySelector('.popup__image-subtitle').textContent = evt.target.nextSibling.nextSibling.querySelector('.gallery__subtitle-text').textContent;
-        addEventListnerEsc(popupImg);
-        close(popupImg);
+        closeEsc(popupImg);
+        closeButton(popupImg);
+        closeOverlay(popupImg);
     });
     return cardElement;
-}
-
-const buttonDisable = button =>{
-    const formButton = button.querySelector('.popup__save-button')
-    formButton.classList.add('popup__save-button_error');
-    formButton.disabled = true;
 }
 
 initialCards.forEach((arr) => {
@@ -125,16 +107,18 @@ initialCards.forEach((arr) => {
 
 addButton.addEventListener('click', () => {
     openPopup(popupAdd);
-    close(popupAdd);
-    addEventListnerEsc(popupAdd);
+    closeButton(popupAdd);
+    closeOverlay(popupAdd);
+    closeEsc(popupAdd);
 });
 
 editButton.addEventListener('click', () => {
     openPopup(popupEdit);
     inputName.value = name.textContent;
     inputProfession.value = profession.textContent;
-    close(popupEdit);
-    addEventListnerEsc(popupEdit);
+    closeButton(popupEdit);
+    closeOverlay(popupEdit);
+    closeEsc(popupEdit);
 });
 
 formEdit.addEventListener('submit', evt => {
@@ -142,14 +126,12 @@ formEdit.addEventListener('submit', evt => {
     name.textContent = inputName.value;
     profession.textContent = inputProfession.value;
     closePopup(popupEdit);
-    buttonDisable(evt.target);
 });
 
 formAdd.addEventListener('submit', evt => {
     evt.preventDefault();
     gallery.prepend(cardCreate(inputImage.value, inputMesto.value));
     closePopup(popupAdd);
-    buttonDisable(evt.target)
     formAdd.reset();
 });
 
