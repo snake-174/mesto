@@ -1,13 +1,9 @@
 const gallery = document.querySelector('.gallery');
 const editButton= document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
-const popup = document.querySelector('.popup');
 const popupEdit= document.querySelector('.popup_edit');
 const popupAdd = document.querySelector('.popup_add');
 const popupImg = document.querySelector('.popup_img');
-const closeButtonAdd = popupAdd.querySelector('.popup__close-button_add');
-const closeButtonEdit = popupEdit.querySelector('.popup__close-button_edit');
-const closeButtonImg = popupImg.querySelector('.popup__close-button_img');
 const formEdit = popupEdit.querySelector('.popup__form_edit');
 const formAdd = popupAdd.querySelector('.popup__form_add');
 const inputName = popupEdit.querySelector('.popup__input_type_name');
