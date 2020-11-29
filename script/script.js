@@ -40,20 +40,6 @@ const initialCards = [
     }
 ];
 
-const closeEsc = popupType =>{
-    const escPressed = evt =>{
-        if(evt.key === 'Escape'){
-            closePopup(popupType);
-        }
-    }
-
-    if(popupType.classList.contains('popup_open')){
-        document.addEventListener('keydown', escPressed);
-    } else {
-        (document.removeEventListener('keydown', escPressed));
-    }
- }
-
 const closeButton = popupType => {
     const popupButton = popupType.querySelector('.popup__close-button');
     popupButton.addEventListener('click', () => {
@@ -67,12 +53,22 @@ const closeOverlay = popupType =>{
     });
 }
 
-const openPopup = popupType => {
-    popupType.classList.add('popup_open');   
+const escPressed = evt =>{
+    if(evt.key === 'Escape'){
+        closePopup(document.querySelector('.popup_open'));
+    }
 }
 
 const closePopup = popupType => {
     popupType.classList.remove('popup_open');
+    document.removeEventListener('keydown', escPressed);
+}
+
+const openPopup = popupType => {
+    popupType.classList.add('popup_open');
+    document.addEventListener('keydown', escPressed);
+    closeButton(popupType);
+    closeOverlay(popupType);
 }
 
 cardCreate = (imageValue, nameValue) => {
@@ -94,9 +90,6 @@ cardCreate = (imageValue, nameValue) => {
         openPopup(popupImg);
         popupImg.querySelector('.popup__image').src = evt.target.src;
         popupImg.querySelector('.popup__image-subtitle').textContent = evt.target.nextSibling.nextSibling.querySelector('.gallery__subtitle-text').textContent;
-        closeEsc(popupImg);
-        closeButton(popupImg);
-        closeOverlay(popupImg);
     });
     return cardElement;
 }
@@ -107,18 +100,12 @@ initialCards.forEach((arr) => {
 
 addButton.addEventListener('click', () => {
     openPopup(popupAdd);
-    closeButton(popupAdd);
-    closeOverlay(popupAdd);
-    closeEsc(popupAdd);
 });
 
 editButton.addEventListener('click', () => {
     openPopup(popupEdit);
     inputName.value = name.textContent;
     inputProfession.value = profession.textContent;
-    closeButton(popupEdit);
-    closeOverlay(popupEdit);
-    closeEsc(popupEdit);
 });
 
 formEdit.addEventListener('submit', evt => {

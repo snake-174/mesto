@@ -21,7 +21,6 @@
     }
   };
   const buttonDisable = buttonElement =>{
-    //const formButton = button.querySelector('.popup__save-button')
     buttonElement.classList.add('popup__save-button_error');
     buttonElement.disabled = true;
 }
