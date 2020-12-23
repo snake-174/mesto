@@ -1,3 +1,4 @@
+import {Validation} from './validation.js'
 import {Card} from './card.js';
 import {initialCards} from './initialCards.js'
 const gallery = document.querySelector('.gallery');
@@ -83,3 +84,14 @@ formAdd.addEventListener('submit', evt => {
     formAdd.reset();
 });
 
+const formConfig = {
+    buttonActive: '.popup__save-button',
+    buttonDisabled: 'popup__save-button_error',
+    input: '.popup__input',
+    inputInvalid: 'popup__input_type_error'
+}
+const addValidation = new Validation(formAdd, formConfig);
+addValidation.enableValidation();
+
+const profileValidation = new Validation(formEdit, formConfig);
+profileValidation.enableValidation();
