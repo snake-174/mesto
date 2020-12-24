@@ -1,5 +1,5 @@
  
- export class Validation{
+ export default class Validation{
   constructor(form, config){
     this._form = form;
     this._buttonActive = config.buttonActive;
@@ -26,10 +26,11 @@
       this._hideInputError(inputElement);
     }
   };
+
   _buttonDisable(buttonElement){
     buttonElement.classList.add(this._buttonDisabled);
     buttonElement.disabled = true; 
-}   
+  }   
 
   _toggleButtonState(isActive, buttonElement){
     if(!isActive){
@@ -38,7 +39,7 @@
       buttonElement.classList.remove(this._buttonDisabled);
       buttonElement.disabled = false;
     }
-  }
+  };
   
   _setEventListeners(){
     const inputList = this._form.querySelectorAll(this._input);
@@ -50,6 +51,13 @@
       });
     });
   }; 
+
+  resetValidation(){
+    const inputList = this._form.querySelectorAll(this._input);
+    inputList.forEach((inputElement) => {
+    this._hideInputError(inputElement);
+    });
+  }
 
   enableValidation(){
     const buttonElement = this._form.querySelector(this._buttonActive);

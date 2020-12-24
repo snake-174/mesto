@@ -36,9 +36,10 @@
             <p class="footer__copyright">&copy; 2020. Авдеев Артем</p>
         </footer>
 
-        <div class="popup popup_edit">    
+        <div class="popup popup_edit">
+            <div class="popup__overlay"></div>  
             <div class="popup__container">
-               <button class="popup__close-button popup__close-button_edit" type="button"><img src="./images/add-button.svg"  class="popup__close-button-img" alt="крест"></button>
+                <button class="popup__close-button popup__close-button_edit" type="button"><img src="./images/add-button.svg"  class="popup__close-button-img" alt="крест"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <form class="popup__form popup__form_edit" novalidate>
                     <input type="text" class="popup__input popup__input_type_name" id="popup__input_name" name="name" minlength="2" maxlength="40" required>
@@ -50,9 +51,10 @@
             </div>
         </div>
 
-        <div class="popup popup_add">      
+        <div class="popup popup_add">  
+            <div class="popup__overlay"></div>
             <div class="popup__container">
-               <button class="popup__close-button popup__close-button_add" type="button"><img src="./images/add-button.svg"  class="popup__close-button-img" alt="крест"></button>
+                <button class="popup__close-button popup__close-button_add" type="button"><img src="./images/add-button.svg"  class="popup__close-button-img" alt="крест"></button>
                 <h2 class="popup__title">Новое место</h2>
                 <form class="popup__form popup__form_add" novalidate>
                     <input type="text" class="popup__input popup__input_type_mesto" id="popup__input_mesto" name="mesto" placeholder="Название" minlength="2" maxlength="30" required>
@@ -64,7 +66,8 @@
             </div>
         </div>
 
-        <div class="popup popup_img">      
+        <div class="popup popup_img">
+            <div class="popup__overlay"></div>    
             <div class="popup__container popup__container_img">
                 <img src="#" class="popup__image" alt="полноразмерная картинка">
                 <button class="popup__close-button popup__close-button_img" type="button"><img src="./images/add-button.svg"  class="popup__close-button-img" alt="крест"></button>

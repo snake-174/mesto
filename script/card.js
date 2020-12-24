@@ -1,4 +1,4 @@
-export class Card {
+export default class Card {
     constructor(data, template, openImagePopup){
         this._image = data.link;
         this._name = data.name;
@@ -7,9 +7,7 @@ export class Card {
     }
 
     _getTemplate(){
-        const cardElement = document.querySelector(this._template).content.querySelector('.gallery__card').cloneNode(true);
-
-        return cardElement;
+        return document.querySelector(this._template).content.querySelector('.gallery__card').cloneNode(true);
     }
 
     cardCreate(){
@@ -17,16 +15,18 @@ export class Card {
 
         this._setEventListeners();
         this._element.querySelector('.gallery__image').src = this._image;
+        this._element.querySelector('.gallery__image').alt = this._name;
         this._element.querySelector('.gallery__subtitle-text').textContent = this._name;
 
         return this._element;
     }
     _delete(){
         this._element.remove();
+        this.card = null
     }
 
     _like(){
-        this._element.querySelector('.gallery__like-button').classList.add('gallery__like-button_active');
+        this._element.querySelector('.gallery__like-button').classList.toggle('gallery__like-button_active');
     }
 
     _setEventListeners(){
