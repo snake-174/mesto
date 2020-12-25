@@ -1,9 +1,10 @@
-import Validation from './FormValidator.js';
+import FormValidator from './FormValidator.js';
 import Card from './Card.js';
 import {initialCards} from './initialCards.js';
 const gallery = document.querySelector('.gallery');
 const editButton= document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
+const popup = document.querySelector('.popup');
 const popupEdit= document.querySelector('.popup_edit');
 const popupAdd = document.querySelector('.popup_add');
 const formEdit = popupEdit.querySelector('.popup__form_edit');
@@ -18,16 +19,16 @@ const formConfig = {
     input: '.popup__input',
     inputInvalid: 'popup__input_type_error'
 }
-const addValidation = new Validation(formAdd, formConfig);
-const profileValidation = new Validation(formEdit, formConfig);
+const addValidation = new FormValidator(formAdd, formConfig);
+const profileValidation = new FormValidator(formEdit, formConfig);
 
 profileValidation.enableValidation();
 addValidation.enableValidation();
 
 const removeEventListeners = () => {
     document.removeEventListener('keydown', escPressed);
-    document.removeEventListener('click', close);
-    document.removeEventListener('mousedown', close);
+    popup.querySelector('.popup__close-button').removeEventListener('click', close);
+    popup.querySelector('.popup__overlay').removeEventListener('mousedown', close);
 }
 
 const close = () => {
@@ -35,7 +36,7 @@ const close = () => {
     removeEventListeners();
 }
 
-const escPressed = evt =>{
+const escPressed = evt => {
     if(evt.key === 'Escape'){
         close();
     }
@@ -48,7 +49,7 @@ const openPopup = popupType => {
     popupType.querySelector('.popup__overlay').addEventListener('mousedown', close);
 }
 
-const openImagePopup = (name, link) =>{
+const openImagePopup = (name, link) => {
     const popupImg = document.querySelector('.popup_img');
     openPopup(popupImg);
     popupImg.querySelector('.popup__image').src = link;
@@ -56,13 +57,14 @@ const openImagePopup = (name, link) =>{
     popupImg.querySelector('.popup__image-subtitle').textContent = name;
 }
 
-const cardCreate = (data, template, openImagePopup) =>{
+const cardCreate = (data, template, openImagePopup) => {
      const card = new Card(data, template, openImagePopup)
      return card.cardCreate()
 }
+
 initialCards.forEach((item) => {
     gallery.append(cardCreate(item, '#card', openImagePopup));
-})
+});
 
 addButton.addEventListener('click', () => {
     openPopup(popupAdd);
@@ -79,16 +81,16 @@ editButton.addEventListener('click', () => {
 formEdit.addEventListener('submit', () => {
     userName.textContent = inputName.value;
     profession.textContent = inputProfession.value;
-    closePopup(popupEdit);
+    close();
 });
 
 formAdd.addEventListener('submit', () => {
     const inputs = {
-    link: popupAdd.querySelector('.popup__input_type_image').value, 
-    name: popupAdd.querySelector('.popup__input_type_mesto').value
+        link: popupAdd.querySelector('.popup__input_type_image').value, 
+        name: popupAdd.querySelector('.popup__input_type_mesto').value
     };
     gallery.prepend(cardCreate(inputs, '#card', openImagePopup));
-    closePopup(popupAdd);
+    close();
     formAdd.reset();
 });
 
