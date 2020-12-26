@@ -4,7 +4,7 @@ import {initialCards} from './initialCards.js';
 const gallery = document.querySelector('.gallery');
 const editButton= document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
-const popup = document.querySelector('.popup');
+const popups = document.querySelectorAll('.popup');
 const popupEdit= document.querySelector('.popup_edit');
 const popupAdd = document.querySelector('.popup_add');
 const formEdit = popupEdit.querySelector('.popup__form_edit');
@@ -14,7 +14,7 @@ const inputProfession = popupEdit.querySelector('.popup__input_type_profession')
 const userName = document.querySelector('.profile__user-name');
 const profession = document.querySelector('.profile__user-profession');
 const formConfig = {
-    buttonActive: '.popup__save-button',
+    button: '.popup__save-button',
     buttonDisabled: 'popup__save-button_error',
     input: '.popup__input',
     inputInvalid: 'popup__input_type_error'
@@ -27,17 +27,23 @@ addValidation.enableValidation();
 
 const removeEventListeners = () => {
     document.removeEventListener('keydown', escPressed);
-    popup.querySelector('.popup__close-button').removeEventListener('click', close);
-    popup.querySelector('.popup__overlay').removeEventListener('mousedown', close);
+    popups.forEach((item) =>{
+        item.querySelector('.popup__close-button').removeEventListener('click', close);
+        item.querySelector('.popup__overlay').removeEventListener('mousedown', close);
+    });
 }
 
 const close = () => {
-    document.querySelector('.popup_open').classList.remove('popup_open');
-    removeEventListeners();
+    popups.forEach((item) => {
+        if (item.classList.contains('popup_open')) {
+            item.classList.remove('popup_open');
+            removeEventListeners();
+        }
+    });
 }
 
 const escPressed = evt => {
-    if(evt.key === 'Escape'){
+    if (evt.key === 'Escape') {
         close();
     }
 }
