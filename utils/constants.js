@@ -25,7 +25,7 @@ export const initialCards = [
     }
 ];
 
-export const gallery = document.querySelector('.gallery');
+export const gallery = '.gallery';
 export const editButton= document.querySelector('.profile__edit-button');
 export const addButton = document.querySelector('.profile__add-button');
 export const popups = document.querySelectorAll('.popup');
@@ -44,4 +44,3 @@ export const formConfig = {
     inputInvalid: 'popup__input_type_error'
 }
 
- 

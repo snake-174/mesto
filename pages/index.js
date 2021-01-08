@@ -1,5 +1,7 @@
 import FormValidator from '../components/FormValidator.js';
 import Card from '../components/Card.js';
+import Section from '../components/Section.js';
+import Popup from '../components/Popup.js';
 import {initialCards,
         gallery,
         editButton,
@@ -16,6 +18,8 @@ import {initialCards,
         formConfig
 } from '../utils/constants.js';
 
+
+const popup = new Popup('.popup_edit');
 const addValidation = new FormValidator(formAdd, formConfig);
 const profileValidation = new FormValidator(formEdit, formConfig);
 
@@ -60,14 +64,17 @@ const openImagePopup = (name, link) => {
     popupImg.querySelector('.popup__image-subtitle').textContent = name;
 }
 
-const cardCreate = (data, template, openImagePopup) => {
-     const card = new Card(data, template, openImagePopup)
-     return card.cardCreate()
+const card = (data, template, openImagePopup) => {
+    const item = new Card(data, template, openImagePopup)
+    return item.cardCreate()
 }
 
-initialCards.forEach((item) => {
-    gallery.append(cardCreate(item, '#card', openImagePopup));
-});
+const defaultCardList = new Section({
+    items: initialCards,
+    renderer: (item) => {
+      defaultCardList.setItem(card(item, '#card', openImagePopup));
+    }
+  }, gallery);
 
 addButton.addEventListener('click', () => {
     openPopup(popupAdd);
@@ -75,7 +82,8 @@ addButton.addEventListener('click', () => {
 });
 
 editButton.addEventListener('click', () => {
-    openPopup(popupEdit);
+    //openPopup(popupEdit);
+    popup.open(); //закончить
     inputName.value = userName.textContent;
     inputProfession.value = profession.textContent;
     profileValidation.resetValidation();
@@ -96,4 +104,5 @@ formAdd.addEventListener('submit', () => {
     close();
     formAdd.reset();
 });
-
+popup.log();
+defaultCardList.renderItems();
