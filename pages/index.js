@@ -1,29 +1,26 @@
-import FormValidator from './FormValidator.js';
-import Card from './Card.js';
-import {initialCards} from './initialCards.js';
-const gallery = document.querySelector('.gallery');
-const editButton= document.querySelector('.profile__edit-button');
-const addButton = document.querySelector('.profile__add-button');
-const popups = document.querySelectorAll('.popup');
-const popupEdit= document.querySelector('.popup_edit');
-const popupAdd = document.querySelector('.popup_add');
-const formEdit = popupEdit.querySelector('.popup__form_edit');
-const formAdd = popupAdd.querySelector('.popup__form_add');
-const inputName = popupEdit.querySelector('.popup__input_type_name');
-const inputProfession = popupEdit.querySelector('.popup__input_type_profession');
-const userName = document.querySelector('.profile__user-name');
-const profession = document.querySelector('.profile__user-profession');
-const formConfig = {
-    button: '.popup__save-button',
-    buttonDisabled: 'popup__save-button_error',
-    input: '.popup__input',
-    inputInvalid: 'popup__input_type_error'
-}
+import FormValidator from '../components/FormValidator.js';
+import Card from '../components/Card.js';
+import {initialCards,
+        gallery,
+        editButton,
+        addButton,
+        popups,
+        popupEdit,
+        popupAdd,
+        formEdit,
+        formAdd,
+        inputName,
+        inputProfession,
+        userName,
+        profession,
+        formConfig
+} from '../utils/constants.js';
+
 const addValidation = new FormValidator(formAdd, formConfig);
 const profileValidation = new FormValidator(formEdit, formConfig);
 
-profileValidation.enableValidation();
 addValidation.enableValidation();
+profileValidation.enableValidation();
 
 const removeEventListeners = () => {
     document.removeEventListener('keydown', escPressed);
