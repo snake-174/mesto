@@ -1,13 +1,11 @@
 import FormValidator from '../components/FormValidator.js';
 import Card from '../components/Card.js';
 import Section from '../components/Section.js';
-import PopupWithImage from '../components/PopupWithImage.js'
+import PopupWithImage from '../components/PopupWithImage.js';
 import {initialCards,
         gallery,
         editButton,
         addButton,
-        popupEdit,
-        popupAdd,
         formEdit,
         formAdd,
         inputName,
@@ -16,53 +14,56 @@ import {initialCards,
         profession,
         formConfig
 } from '../utils/constants.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
 const imgPopup = new PopupWithImage('.popup_img');
 const addValidation = new FormValidator(formAdd, formConfig);
 const profileValidation = new FormValidator(formEdit, formConfig);
-
-addValidation.enableValidation();
-profileValidation.enableValidation();
 
 const card = (obj, {handleCardClick}, template) => {
     const item = new Card(obj, {handleCardClick}, template)
     return item.cardCreate()
 }
+const userInfo = new UserInfo(userName, profession);
+
+const addPopup = new PopupWithForm({popupSelector: '.popup_add',
+    submmitForm: (inputs) => { 
+        document.querySelector('.gallery').prepend(card(inputs, {handleCardClick: (image, name)=>{
+            imgPopup.open(image, name);
+        }}, '#card'));
+    }
+});
+
+const editPopup = new PopupWithForm({popupSelector: '.popup_edit',
+    submmitForm: (inputs) => { 
+        userInfo.setUserInfo(inputs);
+    }
+});
 
 const defaultCardList = new Section({
     items: initialCards,
     renderer: (item) => {
-      defaultCardList.setItem(card(item, {handleCardClick: (image, name)=>{
-            imgPopup.open(image, name);
-            imgPopup.setEventListeners();
+      defaultCardList.setItem(card(item, {handleCardClick: (image, name) => {
+            imgPopup.open(image, name);  
         }}, '#card'));
 }}, gallery);
 
 addButton.addEventListener('click', () => {
-    openPopup(popupAdd);
+    addPopup.open();
     addValidation.resetValidation();
 });
 
 editButton.addEventListener('click', () => {
-    openPopup(popupEdit);
-    inputName.value = userName.textContent;
-    inputProfession.value = profession.textContent;
+    editPopup.open();
+    const userData = userInfo.getUserInfo();
+    inputName.value = userData.name;
+    inputProfession.value =  userData.profession;
     profileValidation.resetValidation();
 });
 
-formEdit.addEventListener('submit', () => {
-    userName.textContent = inputName.value;
-    profession.textContent = inputProfession.value;
-    close();
-});
-
-formAdd.addEventListener('submit', () => {
-    const inputs = {
-        link: popupAdd.querySelector('.popup__input_type_image').value, 
-        name: popupAdd.querySelector('.popup__input_type_mesto').value
-    };
-    gallery.prepend(cardCreate(inputs, '#card'));
-    close();
-    formAdd.reset();
-});
-
+editPopup.setEventListeners();
+addPopup.setEventListeners();
+imgPopup.setEventListeners();
 defaultCardList.renderItems();
+addValidation.enableValidation();
+profileValidation.enableValidation();

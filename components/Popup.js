@@ -8,7 +8,6 @@ export default class Popup{
     }
 
     close(){
-        console.log('a'); //не забудь убрать
         this._popup.classList.remove('popup_open');
     }
 
