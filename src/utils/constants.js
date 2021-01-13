@@ -28,7 +28,6 @@ export const initialCards = [
 export const gallery = '.gallery';
 export const editButton= document.querySelector('.profile__edit-button');
 export const addButton = document.querySelector('.profile__add-button');
-export const popups = document.querySelectorAll('.popup');
 export const popupEdit= document.querySelector('.popup_edit');
 export const popupAdd = document.querySelector('.popup_add');
 export const formEdit = popupEdit.querySelector('.popup__form_edit');

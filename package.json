@@ -1,0 +1,19 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "Этот проект был создан, для практики написания страницы со скриптами Js. Применялись технологии Резиновой и Адаптивной верстки, Java script, а так же методология БЭМ.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/snake-174/mesto.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/snake-174/mesto/issues"
+  },
+  "homepage": "https://github.com/snake-174/mesto#readme"
+}

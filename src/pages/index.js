@@ -37,7 +37,7 @@ const addPopup = new PopupWithForm({popupSelector: '.popup_add',
 const editPopup = new PopupWithForm({popupSelector: '.popup_edit',
     submmitForm: (inputs) => { 
         userInfo.setUserInfo(inputs);
-    }
+     }
 });
 
 const defaultCardList = new Section({
