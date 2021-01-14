@@ -3,27 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css"> 
   <title>Проект: место</title>
 </head>
 <body class="body">
     <div class="root">
         <header class="header">
-            <img src="./images/logo-5.svg" class="header__logo" alt="логотип">
+            <img src="<%=require('./images/logo-5.svg')%>" class="header__logo" alt="логотип">
         </header>
 
         <main class="main">
             <section class="profile">
                 <div class="profile__user">
-                    <img src="./images/jak-iv.png" class="profile__img" alt="аватарка">
+                    <img src="<%=require('./images/jak-iv.png')%>" class="profile__img" alt="аватарка">
                     <div class="profile__card">
                         <h1 class="profile__user-name">Жак-Ив Кусто</h1>
-                        <button class="profile__edit-button" type="button"> <img src="./images/edit-button.svg" class="profile__edit-button-img" alt="кнопка изменить"> </button>
+                        <button class="profile__edit-button" type="button"> <img src="<%=require('./images/edit-button.svg')%>" class="profile__edit-button-img" alt="кнопка изменить"> </button>
                     </div>
                     <p class="profile__user-profession">Исследователь океана</p>
                 </div>
                 <button class="profile__add-button" type="button">
-                    <img src="./images/add-button.svg" class="profile__add-button-image" alt="кнопка добавить">
+                    <img src="<%=require('./images/add-button.svg')%>" class="profile__add-button-image" alt="кнопка добавить">
                 </button>
             </section>
 
@@ -39,7 +38,7 @@
         <div class="popup popup_edit">
             <div class="popup__overlay"></div>  
             <div class="popup__container">
-                <button class="popup__close-button popup__close-button_edit" type="button"><img src="./images/add-button.svg"  class="popup__close-button-img" alt="крест"></button>
+                <button class="popup__close-button popup__close-button_edit" type="button"><img src="<%=require('./images/add-button.svg')%>"  class="popup__close-button-img" alt="крест"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <form class="popup__form popup__form_edit" novalidate>
                     <input type="text" class="popup__input popup__input_type_name" id="popup__input_name" name="name" minlength="2" maxlength="40" required>
@@ -54,7 +53,7 @@
         <div class="popup popup_add">  
             <div class="popup__overlay"></div>
             <div class="popup__container">
-                <button class="popup__close-button popup__close-button_add" type="button"><img src="./images/add-button.svg"  class="popup__close-button-img" alt="крест"></button>
+                <button class="popup__close-button popup__close-button_add" type="button"><img src="<%=require('./images/add-button.svg')%>"  class="popup__close-button-img" alt="крест"></button>
                 <h2 class="popup__title">Новое место</h2>
                 <form class="popup__form popup__form_add" novalidate>
                     <input type="text" class="popup__input popup__input_type_mesto" id="popup__input_mesto" name="mesto" placeholder="Название" minlength="2" maxlength="30" required>
@@ -70,7 +69,7 @@
             <div class="popup__overlay"></div>    
             <div class="popup__container popup__container_img">
                 <img src="#" class="popup__image" alt="полноразмерная картинка">
-                <button class="popup__close-button popup__close-button_img" type="button"><img src="./images/add-button.svg"  class="popup__close-button-img" alt="крест"></button>
+                <button class="popup__close-button popup__close-button_img" type="button"><img src="<%=require('./images/add-button.svg')%>"  class="popup__close-button-img" alt="крест"></button>
                 <h2 class="popup__image-subtitle"></h2>
             </div>
         </div>
@@ -87,6 +86,6 @@
             </div>
         </div>
     </template>
-    <script type="module" src="./pages/index.js" ></script>
+    
 </body>
 </html>
