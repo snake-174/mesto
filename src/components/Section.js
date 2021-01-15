@@ -5,8 +5,12 @@ export default class Section{
         this._container = document.querySelector(containerSelector);
     }
 
-    setItem(element){
-        this._container.append(element);
+    setItem(element, isGrid){
+        if(isGrid){
+            this._container.append(element);
+        } else {
+            this._container.prepend(element);
+        }
     }
 
     renderItems(){

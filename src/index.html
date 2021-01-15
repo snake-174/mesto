@@ -10,7 +10,7 @@
         <header class="header">
             <img src="<%=require('./images/logo-5.svg')%>" class="header__logo" alt="логотип">
         </header>
-
+ 
         <main class="main">
             <section class="profile">
                 <div class="profile__user">
@@ -22,7 +22,7 @@
                     <p class="profile__user-profession">Исследователь океана</p>
                 </div>
                 <button class="profile__add-button" type="button">
-                    <img src="<%=require('./images/add-button.svg')%>" class="profile__add-button-image" alt="кнопка добавить">
+                    <img src="<%=require('/images/add-button.svg')%>" class="profile__add-button-image" alt="кнопка добавить">
                 </button>
             </section>
 
@@ -40,7 +40,7 @@
             <div class="popup__container">
                 <button class="popup__close-button popup__close-button_edit" type="button"><img src="<%=require('./images/add-button.svg')%>"  class="popup__close-button-img" alt="крест"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <form class="popup__form popup__form_edit" novalidate>
+                <form class="popup__form popup__form_edit" novalidate name="edit_form">
                     <input type="text" class="popup__input popup__input_type_name" id="popup__input_name" name="name" minlength="2" maxlength="40" required>
                     <span id="popup__input_name-error" class="popup__input-error"></span>
                     <input type="text" class="popup__input popup__input_type_profession" id="popup__input_profession" name="profession" minlength="2" maxlength="200" required>
@@ -55,7 +55,7 @@
             <div class="popup__container">
                 <button class="popup__close-button popup__close-button_add" type="button"><img src="<%=require('./images/add-button.svg')%>"  class="popup__close-button-img" alt="крест"></button>
                 <h2 class="popup__title">Новое место</h2>
-                <form class="popup__form popup__form_add" novalidate>
+                <form class="popup__form popup__form_add" novalidate name="add_form">
                     <input type="text" class="popup__input popup__input_type_mesto" id="popup__input_mesto" name="mesto" placeholder="Название" minlength="2" maxlength="30" required>
                     <span id="popup__input_mesto-error" class="popup__input-error"></span>
                     <input type="url" class="popup__input popup__input_type_image" id="popup__input_image" name="link" placeholder="Ссылка на картинку" required>
@@ -86,6 +86,6 @@
             </div>
         </div>
     </template>
-    
+
 </body>
 </html>

@@ -1,5 +1,5 @@
 .gallery{
-    width: 100%;
+    /*width: 100%;*/
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 1fr;
@@ -8,9 +8,8 @@
     margin-bottom: 66px;
 }
 
-@media(max-width: 930px){
+@media(max-width: 1090px){
     .gallery{
-        width: 100%;
         grid-template-columns: repeat(2, 1fr);
     }
 }

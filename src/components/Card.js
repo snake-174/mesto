@@ -10,19 +10,20 @@ export default class Card {
         return document.querySelector(this._template).content.querySelector('.gallery__card').cloneNode(true);
     }
 
-    cardCreate(){
+    cardCreate(){ 
         this._element = this._getTemplate();
+        this._galleryImg = this._element.querySelector('.gallery__image');
 
         this._setEventListeners();
-        this._element.querySelector('.gallery__image').src = this._image;
-        this._element.querySelector('.gallery__image').alt = this._mesto;
+        this._galleryImg.src = this._image;
+        this._galleryImg.alt = this._mesto;
         this._element.querySelector('.gallery__subtitle-text').textContent = this._mesto;
 
         return this._element;
     }
     _delete(){
         this._element.remove();
-        this.card = null
+        this._element = null
     }
 
     _like(){

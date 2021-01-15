@@ -1,4 +1,4 @@
-import './index.css';
+//import './index.css';
 import FormValidator from '../components/FormValidator.js';
 import Card from '../components/Card.js';
 import Section from '../components/Section.js';
@@ -29,9 +29,9 @@ const userInfo = new UserInfo(userName, profession);
 
 const addPopup = new PopupWithForm({popupSelector: '.popup_add',
     submmitForm: (inputs) => { 
-        document.querySelector('.gallery').prepend(card(inputs, {handleCardClick: (image, name)=>{
+        defaultCardList.setItem(card(inputs, {handleCardClick: (image, name)=>{
             imgPopup.open(image, name);
-        }}, '#card'));
+        }}, '#card'), false);
     }
 });
 
@@ -46,7 +46,7 @@ const defaultCardList = new Section({
     renderer: (item) => {
       defaultCardList.setItem(card(item, {handleCardClick: (image, name) => {
             imgPopup.open(image, name);  
-        }}, '#card'));
+        }}, '#card'), true);
 }}, gallery);
 
 addButton.addEventListener('click', () => {
