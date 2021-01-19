@@ -1,7 +1,6 @@
 .profile__user{
     margin: auto 0;
     display: grid;
-    width: 486px;
     grid-template-columns: 120px 1fr;
     grid-template-rows: 2.5fr 1fr;
     column-gap: 30px;

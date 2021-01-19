@@ -9,7 +9,7 @@
     transition: opacity 0.3s ease-in;
 }
 .profile__add-button:hover{
-    opacity: 60%;
+    opacity: 0.6;
 }
 
 @media(max-width: 620px){

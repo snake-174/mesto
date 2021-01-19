@@ -6,7 +6,7 @@
     margin-bottom: 50px;
 }
 
-@media(max-width: 920px){
+@media(max-width: 1090px){
     .profile{
         flex-direction: column;
     }
