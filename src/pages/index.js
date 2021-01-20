@@ -27,37 +27,92 @@ const api = new Api ({
     address: 'https://mesto.nomoreparties.co/v1/cohort-19',
     token: '58338ed9-892f-4dd7-97da-f7f2f7277b20'
 });
-const card = (obj, {handleCardClick}, template) => {
-    const item = new Card(obj, {handleCardClick}, template)
-    return item.cardCreate()
+
+const userId = () =>{
+   return api.getUserInfo()
+    .then(res => res)
+    .catch(err => console.log(err));
 }
-const userInfo = new UserInfo(userName, profession);
+
+console.log(userId());
+
+const card = (obj, template) => {
+    const item = new Card(obj, {
+        handleCardClick: (image, name) => {
+            imgPopup.open(image, name);
+        },
+
+        handleLikeClick: (id, isLiked) => {
+                
+        },
+
+        handleDeleteClick: (id) =>{
+            api.removeCard(id)
+                .then(() => card.delete())
+                .catch(err => console.log(`ошибка ${err}`));
+        }
+    }, template);
+
+    return item.cardCreate(api.getUserInfo().then(res => {
+            const userId = res._id;
+            return userId
+        }).catch(err => console.log(err))); //не работает все
+}
+const userInfo = new UserInfo(userName, profession, profilePic);
 
 const addPopup = new PopupWithForm({popupSelector: '.popup_add',
-    submmitForm: (inputs) => { 
-        defaultCardList.setItem(card(inputs, {handleCardClick: (image, name)=>{
-            imgPopup.open(image, name);
-        }}, '#card'), false);
+    submmitForm: (inputs, saveButton) => { 
+        saveButton.textContent = 'Сохранение...';
+        console.log(inputs)
+        api.addCard(inputs)
+            .then(res => {
+                defaultCardList.setItem(card(res, '#card'), false);
+            })
+            .catch(err => console.log(err))
+            .finally(() => {
+                saveButton.textContent = 'Сохранить';
+                addPopup.close();
+            });
+        
     }
 });
 
 const editPopup = new PopupWithForm({popupSelector: '.popup_edit',
-    submmitForm: (inputs) => { 
-        userInfo.setUserInfo(inputs);
+    submmitForm: (inputs, saveButton) => { 
+        saveButton.textContent = 'Сохранение...';
+        api.changeUserInfo(inputs)
+            .then(res => {
+                userInfo.setUserInfo(res);
+            })
+            .catch(err => console.log(err))
+            .finally(() => {
+                saveButton.textContent = 'Сохранить';
+                editPopup.close();
+            })
+        
      }
 });
 
-const profilePicPopup = new PopupWithForm({popupSelector: '.popup_profile-pic',
-    submmitForm: (inputs) => {
-        profilePic.src = inputs.pic;
+const profileAvatarPopup = new PopupWithForm({popupSelector: '.popup_profile-pic',
+    submmitForm: (inputs, saveButton) => {
+        saveButton.textContent = 'Сохранение...';
+        api.changeUserAvatar(inputs)
+            .then(res => {
+                userInfo.setUserAvatar(res)
+            })
+            .catch(err => console.log(err))
+            .finally(() => {
+                saveButton.textContent = 'Сохранить';
+                profileAvatarPopup.close();
+            })
+        ;
     }})
 
 const defaultCardList = new Section({
     renderer: (item) => {
-      defaultCardList.setItem(card(item, {handleCardClick: (image, name) => {
-            imgPopup.open(image, name);  
-        }}, '#card'), true);
-}}, gallery);
+        defaultCardList.setItem(card(item, '#card'), true);
+    }
+}, gallery);
 
 addButton.addEventListener('click', () => {
     addPopup.open();
@@ -68,12 +123,12 @@ editButton.addEventListener('click', () => {
     editPopup.open();
     const userData = userInfo.getUserInfo();
     inputName.value = userData.name;
-    inputProfession.value =  userData.profession;
+    inputProfession.value =  userData.about;
     profileValidation.resetValidation();
 });
 
 profilePic.addEventListener('click', () => {
-    profilePicPopup.open();
+    profileAvatarPopup.open();
     profilePicValidation.resetValidation();
 });
 
@@ -82,16 +137,17 @@ Promise.all([
     api.getInitialCards()
 ])
     .then(res => {
-        defaultCardList.renderItems(res[1]);
+        defaultCardList.renderItems(res[1]/*, res[0]._id*/);
         userInfo.setUserInfo(res[0]);
-        console.log(res[0]);
+        console.log(res);
     })
-    .catch(err => console.log(`Ошибка ${err.status}`));
+    .catch(err => console.log(`Ошибка ${err}`));
+
 
 editPopup.setEventListeners();
 addPopup.setEventListeners();
 imgPopup.setEventListeners();
-profilePicPopup.setEventListeners();
+profileAvatarPopup.setEventListeners();
 addValidation.enableValidation();
 profileValidation.enableValidation();
 profilePicValidation.enableValidation();

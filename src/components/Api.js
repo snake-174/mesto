@@ -23,7 +23,7 @@ export default class Api{
     }
 
     changeUserInfo(data){
-        return fetch(`${this.address}/users/me`, {
+        return fetch(`${this._address}/users/me`, {
             method: 'PATCH',
             headers: {
                 authorization: this._token,
@@ -31,14 +31,29 @@ export default class Api{
             },
             body: JSON.stringify({
                 name: data.name,
-                profession: data.profession
+                about: data.about
+
+            })
+        })
+        .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${result.status}`))
+    }
+
+    changeUserAvatar(data){
+        return fetch (`${this._address}/users/me`, {
+            method: 'PATCH',
+            headers: {
+                authorization:this._token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                avatar: data.avatar
             })
         })
         .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${result.status}`))
     }
 
     addCard(data){
-        return fetch(`${this.address}/cards`, {
+        return fetch(`${this._address}/cards`, {
             method: 'POST',
             headers: {
                 authorization: this._token,

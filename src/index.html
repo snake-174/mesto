@@ -46,7 +46,7 @@
                 <form class="popup__form popup__form_edit" novalidate name="edit_form">
                     <input type="text" class="popup__input popup__input_type_name" id="popup__input_name" name="name" minlength="2" maxlength="40" required>
                     <span id="popup__input_name-error" class="popup__input-error"></span>
-                    <input type="text" class="popup__input popup__input_type_profession" id="popup__input_profession" name="profession" minlength="2" maxlength="200" required>
+                    <input type="text" class="popup__input popup__input_type_profession" id="popup__input_profession" name="about" minlength="2" maxlength="200" required>
                     <span id="popup__input_profession-error" class="popup__input-error"></span>
                     <button class="popup__save-button" type="submit">Сохранить</button>
                 </form>
@@ -59,7 +59,7 @@
                 <button class="popup__close-button" type="button"><img src="<%=require('./images/add-button.svg')%>"  class="popup__close-button-img" alt="крест"></button>
                 <h2 class="popup__title">Новое место</h2>
                 <form class="popup__form popup__form_add" novalidate name="add_form">
-                    <input type="text" class="popup__input popup__input_type_mesto" id="popup__input_mesto" name="mesto" placeholder="Название" minlength="2" maxlength="30" required>
+                    <input type="text" class="popup__input popup__input_type_mesto" id="popup__input_mesto" name="name" placeholder="Название" minlength="2" maxlength="30" required>
                     <span id="popup__input_mesto-error" class="popup__input-error"></span>
                     <input type="url" class="popup__input popup__input_type_image" id="popup__input_image" name="link" placeholder="Ссылка на картинку" required>
                     <span id="popup__input_image-error" class="popup__input-error"></span>
@@ -94,7 +94,7 @@
                 <button class="popup__close-button" type="button"><img src="<%=require('./images/add-button.svg')%>"  class="popup__close-button-img" alt="крест"></button>
                 <h2 class="popup__title">Обновить аватар</h2>
                 <form class="popup__form popup__form_profile-pic" novalidate name="profile-pic_form">
-                    <input type="url" class="popup__input" id="popup__input_profile-image" name="pic" placeholder="Ссылка на картинку" required>
+                    <input type="url" class="popup__input" id="popup__input_profile-image" name="avatar" placeholder="Ссылка на картинку" required>
                     <span id="popup__input_profile-image-error" class="popup__input-error"></span>
                     <button class="popup__save-button" type="submit">Сохранить</button>
                 </form>
