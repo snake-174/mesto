@@ -39,7 +39,7 @@ export default class Api{
     }
 
     changeUserAvatar(data){
-        return fetch(`${this._address}/users/me`, {
+        return fetch(`${this._address}/users/me/avatar`, {
             method: 'PATCH',
             headers: {
                 authorization:this._token,
@@ -60,7 +60,7 @@ export default class Api{
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                name: data.name,
+                name: data.mesto,
                 link: data.link
             })
         })
@@ -71,7 +71,27 @@ export default class Api{
         return fetch(`${this._address}/cards/${id}`, {
             method: 'DELETE',
             headers: {
-                authorization: this._token,
+                authorization: this._token
+            }
+        })
+        .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${result.status}`))
+    }
+
+    setLike(id){
+        return fetch(`${this._address}/cards/likes/${id}`,{
+            method: 'PUT',
+            headers: {
+                authorization: this._token
+            }
+        })
+        .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${result.status}`))
+    }
+
+    removeLike(id){
+        return fetch(`${this._address}/cards/likes/${id}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: this._token
             }
         })
         .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${result.status}`))

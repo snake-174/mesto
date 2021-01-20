@@ -15,7 +15,7 @@
             <section class="profile">
                 <div class="profile__user">
                     <div class="profile__img-container">
-                        <img src="<%=require('./images/jak-iv.png')%>" class="profile__img" alt="аватарка">
+                        <img src="<%=require('./images/avatar-background.png')%>" class="profile__img" alt="аватарка">
                         <div class="profile__img-overlay"></div>
                     </div>
                     <div class="profile__card">
@@ -59,7 +59,7 @@
                 <button class="popup__close-button" type="button"><img src="<%=require('./images/add-button.svg')%>"  class="popup__close-button-img" alt="крест"></button>
                 <h2 class="popup__title">Новое место</h2>
                 <form class="popup__form popup__form_add" novalidate name="add_form">
-                    <input type="text" class="popup__input popup__input_type_mesto" id="popup__input_mesto" name="name" placeholder="Название" minlength="2" maxlength="30" required>
+                    <input type="text" class="popup__input popup__input_type_mesto" id="popup__input_mesto" name="mesto" placeholder="Название" minlength="2" maxlength="30" required>
                     <span id="popup__input_mesto-error" class="popup__input-error"></span>
                     <input type="url" class="popup__input popup__input_type_image" id="popup__input_image" name="link" placeholder="Ссылка на картинку" required>
                     <span id="popup__input_image-error" class="popup__input-error"></span>
