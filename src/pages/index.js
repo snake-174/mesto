@@ -95,6 +95,7 @@ const editPopup = new PopupWithForm({popupSelector: '.popup_edit',
 
 const profileAvatarPopup = new PopupWithForm({popupSelector: '.popup_profile-pic',
     submmitForm: (inputs, saveButton) => {
+        console.log(inputs)
         saveButton.textContent = 'Сохранение...';
         api.changeUserAvatar(inputs)
             .then(res => {

@@ -39,7 +39,7 @@ export default class Api{
     }
 
     changeUserAvatar(data){
-        return fetch (`${this._address}/users/me`, {
+        return fetch(`${this._address}/users/me`, {
             method: 'PATCH',
             headers: {
                 authorization:this._token,
