@@ -72,7 +72,7 @@ const card = (obj, template) => {
                     api.removeCard(id)
                         .then(() => card.delete())
                         .catch(err => console.log(`ошибка ${err}`))
-                        .finally(deletePopup.close());
+                        .finally(() => deletePopup.close());
                 }
             })
             deletePopup.setEventListeners(id)

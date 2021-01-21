@@ -4,13 +4,17 @@ export default class Api{
         this._token = token;
     }
 
+    _response(){
+        return res => res.ok ? res.json() : Promise.reject(`Ошибка ${result.status}`)
+    }
+
     getUserInfo(){
         return fetch(`${this._address}/users/me`, {
             headers: {
                 authorization: this._token
             }
         })
-        .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${result.status}`))
+        .then(this._response())
     }
 
     getInitialCards(){
@@ -19,7 +23,7 @@ export default class Api{
                 authorization: this._token
             }
         })
-        .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${result.status}`))
+        .then(this._response())
     }
 
     changeUserInfo(data){
@@ -35,7 +39,7 @@ export default class Api{
 
             })
         })
-        .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${result.status}`))
+        .then(this._response())
     }
 
     changeUserAvatar(data){
@@ -49,7 +53,7 @@ export default class Api{
                 avatar: data.avatar
             })
         })
-        .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${result.status}`))
+        .then(this._response())
     }
 
     addCard(data){
@@ -64,7 +68,7 @@ export default class Api{
                 link: data.link
             })
         })
-        .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${result.status}`))
+        .then(this._response())
     }
 
     removeCard(id){
@@ -74,7 +78,7 @@ export default class Api{
                 authorization: this._token
             }
         })
-        .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${result.status}`))
+        .then(this._response())
     }
 
     setLike(id){
@@ -84,7 +88,7 @@ export default class Api{
                 authorization: this._token
             }
         })
-        .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${result.status}`))
+        .then(this._response())
     }
 
     removeLike(id){
@@ -94,6 +98,6 @@ export default class Api{
                 authorization: this._token
             }
         })
-        .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${result.status}`))
+        .then(this._response())
     }
 }
