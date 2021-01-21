@@ -70,7 +70,7 @@ const card = (obj, template) => {
                 popupSelector: '.popup_delete',
                 submitForm: (id) => {
                     api.removeCard(id)
-                        .then(() => item.delete())
+                        .then(() => card.delete())
                         .catch(err => console.log(`ошибка ${err}`))
                         .finally(deletePopup.close());
                 }

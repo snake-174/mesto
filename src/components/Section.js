@@ -12,9 +12,9 @@ export default class Section{
         }
     }
 
-    renderItems(data/*, userId*/){
+    renderItems(data){
         data.forEach(item => {
-            this._renderer(item/*, userId*/);
+            this._renderer(item);
         })
     }
 }
