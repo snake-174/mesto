@@ -41,7 +41,6 @@ Promise.all([
         defaultCardList.renderItems(initialCards);
         userInfo.setUserInfo(userData);
         userInfo.setUserAvatar(userData);
-        console.log(initialCards)
     })
     .catch(err => console.log(`Ошибка ${err}`));
 
@@ -54,13 +53,14 @@ const card = (obj, template) => {
             if (isLiked){
                 api.removeLike(id)
                     .then((res) => {
-                        card.like(res.likes)
+                        card.like(res.likes);
+                        card.diactivateLike();
                     })
                     .catch(err => console.log(err))
             }else{
                 api.setLike(id)
                     .then((res) => {
-                        card.like(res.likes)
+                        card.like(res.likes);
                     })
                     .catch(err => console.log(err))
                 }

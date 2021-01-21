@@ -25,13 +25,15 @@ export default class Card {
         this._galleryImg.src = this._image;
         this._galleryImg.alt = this._mesto;
         this._element.querySelector('.gallery__subtitle-text').textContent = this._mesto;
+
         if (this._cardId !== this._userId){
             this._delButton.classList.add('gallery__delete-button_hiden');
         }
-        this._setLikes();
+
         this.like(this._likes)
         return this._element;
     }
+
     delete(){
         this._element.remove();
         this._element = null
@@ -51,34 +53,31 @@ export default class Card {
         });
     }
 
-    _setLikes(){
-        this._element.querySelector('.gallery__like-number').textContent = this._likes.length
+    _setLikes(data){
+        this._element.querySelector('.gallery__like-number').textContent = data.length
     }
 
     _isLiked(){
-        if(this._element.querySelector('.gallery__like-button').classList.contains('gallery__like-button_active')){
+        if(this._element.querySelector('.gallery__like-button').classList.contains('gallery__like-button_active')){            
             return true
-        }
+        }        
         return false
-    }
-
-    _isLikedByUser(){
-        for (let i = 0; i < this._likes.length; i ++){
-            if (this._likes[i]._id === this._userId){
-                return true
-            }
-            return false
-        }
     }
 
     like(data){
         const likeButton = this._element.querySelector('.gallery__like-button');
-        this._likes = data
-        if (this._isLikedByUser()){
-            likeButton.classList.add('gallery__like-button_active');
-        } else {
-            likeButton.classList.remove('gallery__like-button_active');
-        }
-        this._setLikes()
+        this._likes = data;
+        this._setLikes(data);
+        for (let i = 0; i < data.length; i++){
+            if (data[i]._id === this._userId){
+                likeButton.classList.add('gallery__like-button_active');
+            } else {
+                likeButton.classList.remove('gallery__like-button_active');
+            }
+        }       
+    }
+
+    diactivateLike(){
+        this._element.querySelector('.gallery__like-button').classList.remove('gallery__like-button_active')
     }
 }
